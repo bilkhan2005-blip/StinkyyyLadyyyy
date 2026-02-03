@@ -3,209 +3,131 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💛</title>
+<title>Swinging Minion</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at top, #3a1c4a, #0b0612);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  color: white;
-  overflow: hidden;
-}
-
-.container {
-  text-align: center;
-  max-width: 420px;
-  padding: 20px;
-  animation: fadeIn 1.2s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.96); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.minion {
-  margin: 0 auto;
-  animation: sway 3s ease-in-out infinite;
-}
-
-@keyframes sway {
-  0%,100% { transform: rotate(-1deg) translateY(0); }
-  50% { transform: rotate(1deg) translateY(6px); }
-}
-
-h1 {
-  font-weight: 500;
-  margin: 18px 0 10px;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  padding: 12px 26px;
-  font-size: 16px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  margin: 10px;
-  transition: transform 0.2s ease;
-}
-
-button:hover {
-  transform: scale(1.05);
-}
-
-#yes {
-  background: #e63946;
-  color: white;
-  box-shadow: 0 0 20px rgba(230,57,70,0.6);
-}
-
-#no {
-  background: #6c757d;
-  color: white;
-}
-
-/* Glow text */
-.glow {
-  animation: glowPulse 1.5s infinite alternate;
-}
-
-@keyframes glowPulse {
-  from { text-shadow: 0 0 10px #ff758f; }
-  to { text-shadow: 0 0 25px #ffb3c1; }
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  bottom: -40px;
-  font-size: 22px;
-  animation: floatUp 4s linear forwards;
-}
-
-@keyframes floatUp {
-  to {
-    transform: translateY(-110vh) rotate(360deg);
-    opacity: 0;
+  body {
+    margin: 0;
+    background: #111;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    touch-action: manipulation;
   }
-}
+
+  .container {
+    text-align: center;
+  }
+
+  #minion {
+    width: 200px;
+    transform-origin: top center;
+    animation: swing 2.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Swing animation */
+  @keyframes swing {
+    0%   { transform: rotate(-12deg); }
+    50%  { transform: rotate(12deg); }
+    100% { transform: rotate(-12deg); }
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #yesBtn {
+    background: #4CAF50;
+    color: white;
+  }
+
+  #noBtn {
+    background: #F44336;
+    color: white;
+  }
+
+  /* Burst effects */
+  .effect {
+    position: fixed;
+    font-size: 30px;
+    pointer-events: none;
+    animation: burst 1.8s ease-out forwards;
+  }
+
+  @keyframes burst {
+    0% {
+      transform: scale(0) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.6) translateY(-200px);
+      opacity: 0;
+    }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="card">
+<div class="container">
+  <!-- GIF keeps playing automatically -->
+  <img id="minion" src="IMG_1145.GIF" alt="Minion">
 
-<!-- ===== CUTE BEGGING MINION SVG ===== -->
-<svg class="minion" width="240" height="340" viewBox="0 0 240 340">
-
-  <!-- Body -->
-  <rect x="50" y="20" width="140" height="260" rx="70" fill="#FFD500"/>
-
-  <!-- Goggles strap -->
-  <rect x="0" y="85" width="240" height="26" fill="#2f2f2f"/>
-
-  <!-- Left eye -->
-  <circle cx="95" cy="100" r="36" fill="#d9d9d9"/>
-  <circle cx="95" cy="100" r="24" fill="#fff"/>
-  <circle cx="95" cy="104" r="12" fill="#6b4f2a"/>
-  <circle cx="98" cy="107" r="4" fill="#000"/>
-
-  <!-- Tear -->
-  <path d="M88 130 C84 140 90 150 95 155 C100 150 104 140 100 130"
-        fill="#7dd3fc" opacity="0.85"/>
-
-  <!-- Right eye -->
-  <circle cx="145" cy="100" r="36" fill="#d9d9d9"/>
-  <circle cx="145" cy="100" r="24" fill="#fff"/>
-  <circle cx="145" cy="104" r="12" fill="#6b4f2a"/>
-  <circle cx="148" cy="107" r="4" fill="#000"/>
-
-  <!-- Tear -->
-  <path d="M138 130 C134 140 140 150 145 155 C150 150 154 140 150 130"
-        fill="#7dd3fc" opacity="0.85"/>
-
-  <!-- Cute begging smile -->
-  <path d="M90 165 Q120 180 150 165"
-        stroke="#000" stroke-width="4" fill="none"/>
-
-  <!-- Arms hugging -->
-  <path d="M50 210 Q85 235 120 235"
-        stroke="#FFD500" stroke-width="16" fill="none" stroke-linecap="round"/>
-  <path d="M190 210 Q155 235 120 235"
-        stroke="#FFD500" stroke-width="16" fill="none" stroke-linecap="round"/>
-
-  <!-- Heart hugged -->
-  <g transform="translate(120 225)">
-    <path d="M0 8
-             C0 -10 -28 -10 -28 8
-             C-28 30 0 42 0 42
-             C0 42 28 30 28 8
-             C28 -10 0 -10 0 8Z"
-          fill="#e63946">
-      <animateTransform
-        attributeName="transform"
-        type="scale"
-        from="1"
-        to="1.18"
-        dur="1.1s"
-        repeatCount="indefinite"/>
-    </path>
-  </g>
-
-</svg>
-
-<h1 id="question">Will you be my Valentine?</h1>
-
-<div class="buttons">
-  <button id="yes" onclick="yesClicked()">Yes ❤️</button>
-  <button id="no" onclick="noClicked()">No</button>
-</div>
-
+  <div class="buttons">
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+  </div>
 </div>
 
 <script>
-let noCount = 0;
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const minion = document.getElementById("minion");
 
-function noClicked() {
-  const q = document.getElementById("question");
-  noCount++;
-  if (noCount === 1) q.innerText = "Are you sure?";
-  else if (noCount === 2) q.innerText = "Think about it...";
-  else if (noCount === 3) q.innerText = "Give it another chance";
-  else if (noCount === 4) q.innerText = "You're breaking my heart 💔";
-}
+  function popEffects(x, y) {
+    const emojis = ["❤️", "🎉"];
 
-function yesClicked() {
-  document.getElementById("card").innerHTML = `
-    <h1 class="glow">YAYYYYYYYYY💗🥰🥺</h1>
-    <p style="font-size:18px; line-height:1.6">
-      You just made <b>Bilal e Tiny</b> really happy<br><br>
-      I Love You soo much<br>
-      My Cutie Putie<br>
-      <b>FATTT PANDAAAAA 🐼💖</b>
-    </p>
-  `;
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement("span");
+      span.className = "effect";
+      span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
 
-  for (let i = 0; i < 18; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerText = "💗";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
+      span.style.left = (x + (Math.random() * 80 - 40)) + "px";
+      span.style.top = (y + (Math.random() * 40 - 20)) + "px";
+
+      document.body.appendChild(span);
+
+      setTimeout(() => span.remove(), 1800);
+    }
   }
-}
+
+  function handleYes(e) {
+    // Stop swinging, GIF keeps playing
+    minion.style.animation = "none";
+
+    const touch = e.touches ? e.touches[0] : e;
+    popEffects(touch.clientX, touch.clientY);
+  }
+
+  // Mobile + desktop support
+  yesBtn.addEventListener("click", handleYes);
+  yesBtn.addEventListener("touchstart", handleYes);
+
+  noBtn.addEventListener("click", () => {});
+  noBtn.addEventListener("touchstart", () => {});
 </script>
 
 </body>
