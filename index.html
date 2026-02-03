@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swinging Minion</title>
+<title>Swinging GIF</title>
 
 <style>
   body {
@@ -22,8 +22,11 @@
     text-align: center;
   }
 
+  /* GIF */
   #minion {
-    width: 200px;
+    width: 220px;
+    display: block;
+    margin: 0 auto;
     transform-origin: top center;
     animation: swing 2.5s ease-in-out infinite;
     will-change: transform;
@@ -37,15 +40,15 @@
   }
 
   .buttons {
-    margin-top: 20px;
+    margin-top: 24px;
   }
 
   button {
     font-size: 18px;
-    padding: 12px 24px;
+    padding: 12px 26px;
     margin: 0 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
   }
 
@@ -62,9 +65,9 @@
   /* Burst effects */
   .effect {
     position: fixed;
-    font-size: 30px;
+    font-size: 32px;
     pointer-events: none;
-    animation: burst 1.8s ease-out forwards;
+    animation: burst 1.6s ease-out forwards;
   }
 
   @keyframes burst {
@@ -73,7 +76,7 @@
       opacity: 1;
     }
     100% {
-      transform: scale(1.6) translateY(-200px);
+      transform: scale(1.6) translateY(-220px);
       opacity: 0;
     }
   }
@@ -83,8 +86,8 @@
 <body>
 
 <div class="container">
-  <!-- GIF keeps playing automatically -->
-  <img id="minion" src="IMG_1145.GIF" alt="Minion">
+  <!-- IMPORTANT: filename must match Netlify exactly -->
+  <img id="minion" src="begging.gif" alt="Minion">
 
   <div class="buttons">
     <button id="yesBtn">YES</button>
@@ -94,13 +97,12 @@
 
 <script>
   const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
   const minion = document.getElementById("minion");
 
   function popEffects(x, y) {
     const emojis = ["❤️", "🎉"];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 18; i++) {
       const span = document.createElement("span");
       span.className = "effect";
       span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -110,24 +112,21 @@
 
       document.body.appendChild(span);
 
-      setTimeout(() => span.remove(), 1800);
+      setTimeout(() => span.remove(), 1600);
     }
   }
 
   function handleYes(e) {
-    // Stop swinging, GIF keeps playing
+    // Stop swinging ONLY (GIF continues playing)
     minion.style.animation = "none";
 
-    const touch = e.touches ? e.touches[0] : e;
-    popEffects(touch.clientX, touch.clientY);
+    const point = e.touches ? e.touches[0] : e;
+    popEffects(point.clientX, point.clientY);
   }
 
-  // Mobile + desktop support
+  // Desktop + Mobile
   yesBtn.addEventListener("click", handleYes);
   yesBtn.addEventListener("touchstart", handleYes);
-
-  noBtn.addEventListener("click", () => {});
-  noBtn.addEventListener("touchstart", () => {});
 </script>
 
 </body>
