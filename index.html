@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swinging GIF</title>
+<title>Be My Valentine</title>
 
 <style>
   body {
@@ -20,9 +20,17 @@
 
   .container {
     text-align: center;
+    color: white;
+    padding: 20px;
   }
 
-  /* GIF */
+  #valentineText {
+    font-size: 26px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+  }
+
   #minion {
     width: 220px;
     display: block;
@@ -32,7 +40,6 @@
     will-change: transform;
   }
 
-  /* Swing animation */
   @keyframes swing {
     0%   { transform: rotate(-12deg); }
     50%  { transform: rotate(12deg); }
@@ -40,7 +47,7 @@
   }
 
   .buttons {
-    margin-top: 24px;
+    margin-top: 26px;
   }
 
   button {
@@ -62,7 +69,6 @@
     color: white;
   }
 
-  /* Burst effects */
   .effect {
     position: fixed;
     font-size: 32px;
@@ -86,7 +92,10 @@
 <body>
 
 <div class="container">
-  <!-- IMPORTANT: filename must match Netlify exactly -->
+  <div id="valentineText">
+    Will you be my Valentine? 🥺💝
+  </div>
+
   <img id="minion" src="begging.gif" alt="Minion">
 
   <div class="buttons">
@@ -97,12 +106,13 @@
 
 <script>
   const yesBtn = document.getElementById("yesBtn");
+  const valentineText = document.getElementById("valentineText");
   const minion = document.getElementById("minion");
 
   function popEffects(x, y) {
-    const emojis = ["❤️", "🎉"];
+    const emojis = ["❤️", "🎉", "💖", "💝", "🥰"];
 
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 22; i++) {
       const span = document.createElement("span");
       span.className = "effect";
       span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -117,14 +127,23 @@
   }
 
   function handleYes(e) {
-    // Stop swinging ONLY (GIF continues playing)
+    // stop swing, keep gif playing
     minion.style.animation = "none";
+
+    // change text
+    valentineText.innerHTML = `
+      <strong>YAYYYYYYYYYY 🥺🫂💝</strong><br><br>
+      You Made Stinky Ladyy The Happiest 💝🥰<br>
+      I Love You Soooooooo Much 🥰❤️🥺
+    `;
 
     const point = e.touches ? e.touches[0] : e;
     popEffects(point.clientX, point.clientY);
+
+    // hide buttons after yes (optional but cute)
+    document.querySelector(".buttons").style.display = "none";
   }
 
-  // Desktop + Mobile
   yesBtn.addEventListener("click", handleYes);
   yesBtn.addEventListener("touchstart", handleYes);
 </script>
