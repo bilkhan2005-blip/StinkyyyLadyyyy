@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💛</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #3a1c4a, #0b0612);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  max-width: 420px;
+  padding: 20px;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.minion {
+  margin: 0 auto;
+  animation: sway 2.8s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%,100% { transform: rotate(-1deg) translateY(0); }
+  50% { transform: rotate(1deg) translateY(6px); }
+}
+
+h1 {
+  font-weight: 500;
+  margin: 18px 0 10px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 26px;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+#yes {
+  background: #e63946;
+  color: white;
+  box-shadow: 0 0 20px rgba(230,57,70,0.6);
+}
+
+#no {
+  background: #6c757d;
+  color: white;
+}
+
+/* Glow text */
+.glow {
+  animation: glowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #ff758f; }
+  to { text-shadow: 0 0 25px #ffb3c1; }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 22px;
+  animation: floatUp 4s linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="card">
+
+<!-- ===== MINION SVG ===== -->
+<svg class="minion" width="220" height="320" viewBox="0 0 220 320">
+  <rect x="40" y="20" width="140" height="240" rx="65" fill="#FFD500"/>
+  <rect x="0" y="80" width="220" height="24" fill="#2f2f2f"/>
+
+  <circle cx="85" cy="92" r="34" fill="#d9d9d9"/>
+  <circle cx="85" cy="92" r="22" fill="#fff"/>
+  <circle cx="85" cy="96" r="11" fill="#5c3b1e"/>
+  <circle cx="88" cy="99" r="4" fill="#000"/>
+
+  <circle cx="135" cy="92" r="34" fill="#d9d9d9"/>
+  <circle cx="135" cy="92" r="22" fill="#fff"/>
+  <circle cx="135" cy="96" r="11" fill="#5c3b1e"/>
+  <circle cx="138" cy="99" r="4" fill="#000"/>
+
+  <path d="M85 165 Q110 150 135 165" stroke="#000" stroke-width="4" fill="none"/>
+
+  <rect x="40" y="185" width="140" height="80" fill="#1e6091"/>
+  <rect x="58" y="185" width="20" height="40" fill="#1e6091"/>
+  <rect x="142" y="185" width="20" height="40" fill="#1e6091"/>
+  <circle cx="68" cy="220" r="4" fill="#000"/>
+  <circle cx="152" cy="220" r="4" fill="#000"/>
+
+  <rect x="0" y="210" width="55" height="12" rx="6" fill="#FFD500"/>
+  <rect x="165" y="210" width="55" height="12" rx="6" fill="#FFD500"/>
+
+  <!-- Pulsing heart -->
+  <g transform="translate(110 215)">
+    <path d="M0 8
+             C0 -10 -26 -10 -26 8
+             C-26 28 0 40 0 40
+             C0 40 26 28 26 8
+             C26 -10 0 -10 0 8Z"
+          fill="#e63946">
+      <animateTransform
+        attributeName="transform"
+        type="scale"
+        from="1"
+        to="1.2"
+        dur="1s"
+        repeatCount="indefinite"/>
+    </path>
+  </g>
+</svg>
+
+<h1 id="question">Will you be my Valentine?</h1>
+
+<div class="buttons">
+  <button id="yes" onclick="yesClicked()">Yes ❤️</button>
+  <button id="no" onclick="noClicked()">No</button>
+</div>
+
+</div>
+
+<script>
+let noCount = 0;
+
+function noClicked() {
+  const q = document.getElementById("question");
+  noCount++;
+  if (noCount === 1) q.innerText = "Are you sure?";
+  else if (noCount === 2) q.innerText = "Think about it...";
+  else if (noCount === 3) q.innerText = "Give it another chance";
+  else if (noCount === 4) q.innerText = "You're breaking my heart 💔";
+}
+
+function yesClicked() {
+  document.getElementById("card").innerHTML = `
+    <h1 class="glow">YAYYYYYYYYY💗🥰🥺</h1>
+    <p style="font-size:18px; line-height:1.6">
+      You just made <b>Bilal e Tiny</b> really happy<br><br>
+      I Love You soo much<br>
+      My Cutie Putie<br>
+      <b>FATTT PANDAAAAA 🐼💖</b>
+    </p>
+  `;
+
+  // spawn floating hearts
+  for (let i = 0; i < 18; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+}
+</script>
+
+</body>
+</html>
